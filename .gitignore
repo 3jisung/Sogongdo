@@ -30,3 +30,4 @@ build/
 
 *.iml
 .idea/
+/bin/
