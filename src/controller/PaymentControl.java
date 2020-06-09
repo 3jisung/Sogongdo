@@ -28,7 +28,7 @@ public class PaymentControl extends HttpServlet {
 		
 		switch(paymentMenu)
 		{
-		case 1:		//예약 번호 검색.
+		case 1:		//예약 번호 검색
 			searchReservationID(req, resp);
 			break;
 		case 2:		//결제내역 등록
