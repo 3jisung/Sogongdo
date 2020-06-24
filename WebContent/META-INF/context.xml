@@ -6,5 +6,5 @@
               username="root" password="0OSE!"
               driverClassName="com.mysql.cj.jdbc.Driver"
               url="jdbc:mysql://m72e.iptime.org:33061/db"
-              closeMethod="close" />
+              closeMethod="close"/>
 </Context>

@@ -3,92 +3,93 @@ package model;
 import java.sql.Date;
 
 public class User {
-	private String id;
-	private String password;
-	private String name;
-	private String address;
-	private Date birth;
-	private String phoneNumber;
-	private String email;
-	private int UserTypeCode_code;
-	
-	public User() {};
-	
-	public User(String id, String password, String name, String address, Date birth, String phoneNumber, String email,
-			int userTypeCode_code) {
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.address = address;
-		this.birth = birth;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
-		this.UserTypeCode_code = userTypeCode_code;
-	}
+    private String id;
+    private String password;
+    private String name;
+    private String address;
+    private Date birth;
+    private String phoneNumber;
+    private String email;
+    private int UserTypeCode_code;
 
-	public String getId() {
-		return id;
-	}
+    public User() {
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public User(String id, String password, String name, String address, Date birth, String phoneNumber, String email,
+                int userTypeCode_code) {
+        this.id = id;
+        this.password = password;
+        this.name = name;
+        this.address = address;
+        this.birth = birth;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.UserTypeCode_code = userTypeCode_code;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Date getBirth() {
-		return birth;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public void setBirth(Date birth) {
-		this.birth = birth;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+    public Date getBirth() {
+        return birth;
+    }
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+    public void setBirth(Date birth) {
+        this.birth = birth;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
-	public int getUserTypeCode_code() {
-		return UserTypeCode_code;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setUserTypeCode_code(int userTypeCode_code) {
-		UserTypeCode_code = userTypeCode_code;
-	}
-	
-	
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getUserTypeCode_code() {
+        return UserTypeCode_code;
+    }
+
+    public void setUserTypeCode_code(int userTypeCode_code) {
+        UserTypeCode_code = userTypeCode_code;
+    }
+
+
 }
