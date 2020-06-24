@@ -1,8 +1,6 @@
 package controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import common.PaymentDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,11 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang3.StringUtils;
-
-import common.PaymentDAO;
-import model.*;
+import java.io.IOException;
 
 @WebServlet("/PaymentControl")
 
