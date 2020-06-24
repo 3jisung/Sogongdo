@@ -38,7 +38,7 @@ public enum SettlementDAO {
     }
 
     // 일정 범위 내 모든 정산 내역을 질의함
-    public List<Settlement> getSettlements(String work_place, Date start_date, Date end_date) {
+    public List<Settlement> selectSettlements(String work_place, Date start_date, Date end_date) {
         // 결과가 들어갈 리스트
         final List<Settlement> settlements = new ArrayList<>();
 
@@ -77,5 +77,48 @@ public enum SettlementDAO {
         }
 
         return settlements;
+    }
+
+    public int updateSettlement(Timestamp time) {
+        int result = 0;
+        String query = "update db.Settlement " +
+                "set settlementTime = ?" +
+                "where  settlementDate = ? and " +
+                "       WorkPlace_has_User_WorkPlace_name = ? and" +
+                "       WorkPlace_has_User_admin_id = ?";
+        try (
+                Connection conn = DataBase.getConnection();
+                PreparedStatement preparedStatement = conn.prepareStatement(query)
+        ) {
+            preparedStatement.setTimestamp(1, time);
+
+            result = preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public int deleteSettlement(Date date, String work_place, String name) {
+        int result = 0;
+        String query = "delete from db.Settlement " +
+                "where  settlementDate = ? and " +
+                "       WorkPlace_has_User_WorkPlace_name = ? and" +
+                "       WorkPlace_has_User_admin_id = ?";
+        try (
+                Connection conn = DataBase.getConnection();
+                PreparedStatement preparedStatement = conn.prepareStatement(query)
+        ) {
+            preparedStatement.setDate(1, date);
+            preparedStatement.setString(2, work_place);
+            preparedStatement.setString(3, name);
+
+            result = preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 }
