@@ -35,8 +35,7 @@ public class ReservationDAO {
 	}
 
 	public void createReservation(Reservation r) {
-		String sql = "insert into db.Reservation (Reservation_id, User_id, Facility_id, Payment_id,"
-				+ " startDate, endDate, people, registerDate, cancelDate)" + " values (?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into db.Reservation values (?,?,?,?,?,?,?,?,?)";
 
 		try (
 				Connection conn = DataBase.getConnection();
@@ -60,7 +59,7 @@ public class ReservationDAO {
 	}
 
 	public void updateReservation(Reservation r) {
-		String sql = "update db.Reservation set startDate = ?, endDate = ?, people = ?, registerDate = ?, where Reservation_id = ?";
+		String sql = "update db.Reservation set startDate = ?, endDate = ?, people = ?, registerDate = ? where Reservation_id = ?";
 		try (
 				Connection conn = DataBase.getConnection();
 				PreparedStatement pst = conn.prepareStatement(sql);
