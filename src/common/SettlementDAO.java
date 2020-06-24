@@ -9,7 +9,7 @@ import java.util.List;
 public enum SettlementDAO {
     INSTACE;
 
-    public List<Settlement> get(Date start_date, Date end_date) {
+    public List<Settlement> getSettlements(String work_place, Date start_date, Date end_date) {
         final List<Settlement> settlements = new ArrayList<>();
 
         String query = "SELECT * FROM Settlement";
@@ -21,10 +21,10 @@ public enum SettlementDAO {
 
             while (rs.next()) {
                 settlements.add( new Settlement(
-                        rs.getString("settlementDate"),
+                        rs.getDate("settlementDate"),
                         rs.getString("WorkPlace_has_User_WorkPlace_name"),
                         rs.getString("WorkPlace_has_User_admin_id"),
-                        rs.getString("settlementTime")
+                        rs.getTimestamp("settlementTime")
                         )
                 );
             }
