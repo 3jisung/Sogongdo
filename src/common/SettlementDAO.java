@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum SettlementDAO {
-    INSTACE;
+    INSTANCE;
     // enum을 이용한 싱글톤으로 만들었다.
 
     // 일정 범위 내 모든 정산 내역을 질의함
