@@ -1,11 +1,12 @@
+<%@page import="model.WorkPlaceDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>사업장 조회</title>
 <style>
 .sidenav {
 	height: 100%;
@@ -57,6 +58,7 @@
 </style>
 </head>
 <body>
+
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		<a href="WorkPlaceCreate.jsp">사업장 추가</a>
@@ -68,6 +70,7 @@
 		<a href="workplaceInfoDeleteList.do">사업장 속성 삭제</a>
 		<a href="workplaceInfoList.do">사업장 속성 조회</a>
 	</div>
+
 
 	<div id="main">
 		<span style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776; open</span>
@@ -84,5 +87,42 @@
 			document.getElementById("main").style.marginLeft = "0";
 		}
 	</script>
+
+	
+	<%  ArrayList<WorkPlaceDTO> list = (ArrayList<WorkPlaceDTO>) request.getAttribute("list"); 
+    if(!list.isEmpty()) {  %>
+	   <table border="1">
+	   	<thead>
+			<tr>
+				<td>사업장명</td>
+			</tr>
+		</thead>
+			
+			<%   for(int i=0; i<list.size(); i++){   
+				WorkPlaceDTO workplace = list.get(i);   %>
+			       
+			        <tr>
+			        	<td><%=workplace.getName() %></td>
+			       </tr>
+			       
+			<%   }
+       }else{
+    	   out.print("<h3>등록된 사업장 정보가 없습니다.</h3>");
+       }
+	%>
+	  </table>
+
+	<script>
+		function openNav() {
+			document.getElementById("mySidenav").style.width = "250px";
+			document.getElementById("main").style.marginLeft = "250px";
+		}
+
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0";
+			document.getElementById("main").style.marginLeft = "0";
+		}
+	</script>
+	
 </body>
 </html>

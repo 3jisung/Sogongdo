@@ -5,7 +5,6 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 .sidenav {
 	height: 100%;
@@ -57,21 +56,24 @@
 </style>
 </head>
 <body>
-	<div id="mySidenav" class="sidenav">
+<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<a href="WorkPlaceCreate.jsp">사업장 추가</a>
-		<a href="workplaceUpdateList.do">사업장 수정</a> 
-		<a href="workplaceDeleteList.do">사업장 삭제</a> 
-		<a href="workplaceList.do">사업장 조회</a>
-		<a href="workplaceInfoCreateList.do">사업장 속성 추가</a> 
-		<a href="workplaceInfoUpdateList.do">사업장 속성 수정</a>
-		<a href="workplaceInfoDeleteList.do">사업장 속성 삭제</a>
+		<a href="#">사업장 추가</a> 
+		<a href="#">사업장 수정</a> 
+		<a href="#">사업장 삭제</a>
+		<a href="#">사업장 조회</a>
+		<a href="workplaceInfoCreate.do">사업장 속성 추가</a> 
+		<a href="#">사업장 속성 수정</a> 
+		<a href="#">사업장 속성 삭제</a>
 		<a href="workplaceInfoList.do">사업장 속성 조회</a>
 	</div>
 
 	<div id="main">
 		<span style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776; open</span>
 	</div>
+	
+	<h3>${name}님 가입이 완료되었습니다.</h3>
+	<%@ include file="home.jsp" %>
 
 	<script>
 		function openNav() {

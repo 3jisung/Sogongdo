@@ -1,10 +1,12 @@
+<%@page import="model.WorkPlaceDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>사업장 속성 조회</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 .sidenav {
@@ -57,21 +59,51 @@
 </style>
 </head>
 <body>
+
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<a href="WorkPlaceCreate.jsp">����� �߰�</a>
-		<a href="workplaceUpdateList.do">����� ����</a> 
-		<a href="workplaceDeleteList.do">����� ����</a> 
-		<a href="workplaceList.do">����� ��ȸ</a>
-		<a href="workplaceInfoCreateList.do">����� �Ӽ� �߰�</a> 
-		<a href="workplaceInfoUpdateList.do">����� �Ӽ� ����</a>
-		<a href="workplaceInfoDeleteList.do">����� �Ӽ� ����</a>
-		<a href="workplaceInfoList.do">����� �Ӽ� ��ȸ</a>
+		<a href="WorkPlaceCreate.jsp">사업장 추가</a>
+		<a href="workplaceUpdateList.do">사업장 수정</a> 
+		<a href="workplaceDeleteList.do">사업장 삭제</a> 
+		<a href="workplaceList.do">사업장 조회</a>
+		<a href="workplaceInfoCreateList.do">사업장 속성 추가</a> 
+		<a href="workplaceInfoUpdateList.do">사업장 속성 수정</a>
+		<a href="workplaceInfoDeleteList.do">사업장 속성 삭제</a>
+		<a href="workplaceInfoList.do">사업장 속성 조회</a>
 	</div>
-
 	<div id="main">
 		<span style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776; open</span>
 	</div>
+
+	
+	<%  ArrayList<WorkPlaceDTO> list = (ArrayList<WorkPlaceDTO>) request.getAttribute("list"); 
+    if(!list.isEmpty()) {  %>
+	   <table border="1">
+	   	<thead>
+			<tr>
+				<td>사업장명</td>
+				<td>상태</td>
+				<td>전화번호</td>
+				<td>관리자</td>
+			</tr>
+		</thead>
+			
+			<%   for(int i=0; i<list.size(); i++){   
+				WorkPlaceDTO workplace = list.get(i);   %>
+			       
+			        <tr>
+			        	<td><%=workplace.getName() %></td>
+			            <td><%=workplace.getState() %></td>
+			            <td><%=workplace.getTel() %></td>
+			            <td><%=workplace.getAdmin() %></td>
+			       </tr>
+			       
+			<%   }
+       }else{
+    	   out.print("<h3>등록된 사업장 속성 정보가 없습니다.</h3>");
+       }
+	%>
+	  </table>
 
 	<script>
 		function openNav() {
@@ -84,5 +116,6 @@
 			document.getElementById("main").style.marginLeft = "0";
 		}
 	</script>
+	
 </body>
 </html>
