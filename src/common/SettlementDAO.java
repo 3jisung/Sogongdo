@@ -12,11 +12,17 @@ public enum SettlementDAO {
     public List<Settlement> getSettlements(String work_place, Date start_date, Date end_date) {
         final List<Settlement> settlements = new ArrayList<>();
 
-        String query = "SELECT * FROM Settlement";
+        String query = "select * from db.Settlement " +
+                "where `WorkPlace_has_User_WorkPlace_name` = ? and " +
+                "`settlementDate` between ? and ?;";
         try (
                 Connection conn = DataBase.getConnection();
                 PreparedStatement preparedStatement = conn.prepareStatement(query);
         ) {
+            preparedStatement.setString(1, work_place);
+            preparedStatement.setDate(2, start_date);
+            preparedStatement.setDate(3, end_date);
+
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
