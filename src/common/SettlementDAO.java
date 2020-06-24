@@ -43,9 +43,10 @@ public enum SettlementDAO {
         final List<Settlement> settlements = new ArrayList<>();
 
         // 쿼리문. 파라메터는 ? 사용
-        String query = "select * from db.Settlement " +
-                "where `WorkPlace_has_User_WorkPlace_name` = ? and " +
-                "`settlementDate` between ? and ?;";
+        String query =
+                "select * from db.Settlement " +
+                "where  `WorkPlace_has_User_WorkPlace_name` = ? and " +
+                "       `settlementDate` between ? and ?";
         try (
                 // try 블럭 안에 connection과 statement 생성
                 Connection conn = DataBase.getConnection();
@@ -79,9 +80,10 @@ public enum SettlementDAO {
         return settlements;
     }
 
-    public int updateSettlement(Timestamp time) {
+    public int updateSettlement(Date date, String work_place, String name, Timestamp process_time) {
         int result = 0;
-        String query = "update db.Settlement " +
+        String query =
+                "update db.Settlement " +
                 "set settlementTime = ?" +
                 "where  settlementDate = ? and " +
                 "       WorkPlace_has_User_WorkPlace_name = ? and" +
@@ -90,7 +92,10 @@ public enum SettlementDAO {
                 Connection conn = DataBase.getConnection();
                 PreparedStatement preparedStatement = conn.prepareStatement(query)
         ) {
-            preparedStatement.setTimestamp(1, time);
+            preparedStatement.setTimestamp(1, process_time);
+            preparedStatement.setDate(2, date);
+            preparedStatement.setString(3, work_place);
+            preparedStatement.setString(4, name);
 
             result = preparedStatement.executeUpdate();
         } catch (Exception e) {
@@ -102,7 +107,8 @@ public enum SettlementDAO {
 
     public int deleteSettlement(Date date, String work_place, String name) {
         int result = 0;
-        String query = "delete from db.Settlement " +
+        String query =
+                "delete from db.Settlement " +
                 "where  settlementDate = ? and " +
                 "       WorkPlace_has_User_WorkPlace_name = ? and" +
                 "       WorkPlace_has_User_admin_id = ?";
