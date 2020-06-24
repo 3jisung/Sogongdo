@@ -24,14 +24,15 @@ public class ReservationDAO {
 //			Context context = new InitialContext();
 //			ds = (DataSource) context.lookup("java:comp/env/jdbc/MySQL");
 			
-//			Class.forName("com.mysql.jdbc.Driver");
-//			conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:375/sogongdo?useSSL=false", "admin", "test");
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:375/sogongdo?useSSL=false", "admin", "test");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	public ArrayList<Reservation> select() {
 		ArrayList<Reservation> articles = new ArrayList<Reservation>();
+		// sql �ڵ�
 		
 //		String sql = "SELECT * FROM reservation";
 //		try {
@@ -46,7 +47,7 @@ public class ReservationDAO {
 //				String people = rs.getString("people");
 //				String payment = rs.getString("payment");
 //				String cancelDate = rs.getString("cancelDate");
-//				articles.add(new ReservationDTO(id, userID, workplaceID, facilityID, date, people, payment, cancelDate));
+//				articles.add(new ReservationDTO(id, userID, facilityID, paymentID, date, people, payment, cancelDate));
 //			}
 //		} catch (SQLException e) {
 //			e.printStackTrace();
@@ -70,7 +71,7 @@ public class ReservationDAO {
 //			e.printStackTrace();
 //		}
 //		
-		articles.add(new Reservation("1","2","3","4","5","6","7","8", "9"));
+		articles.add(new Reservation("1","2","3","4","2020-06-01","2020-06-03","7","2020-05-25", "2020-05-29"));
 		return articles;
 	}
 }

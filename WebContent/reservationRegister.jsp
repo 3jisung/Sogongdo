@@ -1,8 +1,8 @@
 
-<%@taglib prefix= "c" uri= "http://java.sun.com/jsp/jstl/core" %>
 <%@page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Reservation"%>
+<%@taglib prefix= "c" uri= "http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -14,21 +14,25 @@
 
 <body>
 <%
-	String workplace = request.getParameter("workplace");
-	String facility = request.getParameter("facility");
-	String date = request.getParameter("date");
+	String userID = request.getParameter("userID");
+	String workplace = request.getParameter("facility");
+	String facility = request.getParameter("startDate");
+	String date = request.getParameter("endDate");
 	String people = request.getParameter("people");
 	String payment = request.getParameter("payment");
 	if(workplace.equals("") || facility.equals("") || date.equals("") || people.equals("")){
-		request.setAttribute("errMsg", "Please write all the input");
-		//RequestDispatcher rd = request.getRequestDispatcher("reservation");
-		//rd.forward(request, response);
-		
-		pageContext.forward("reservation");
-		
-		//response.sendRedirect("reservation");
-	}
-	else
-		pageContext.forward("reservationDetail.jsp");
 %>
+	<c:redirect url="/reservation">
+		<c:param name="message" value="Plese check your inputs"/>
+	</c:redirect>
+<%
+	}
+	else{
+		ReservationDTO dto = new ReservationDTO();
+
+		// 결제 페이지 
+		pageContext.forward("reservationDetail.jsp");
+	}
+%>
+
 </body>
