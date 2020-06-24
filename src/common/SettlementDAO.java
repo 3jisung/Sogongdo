@@ -30,21 +30,21 @@ public enum SettlementDAO {
             preparedStatement.setDate(3, end_date);
 
             // 쿼리 수행
-            ResultSet rs = preparedStatement.executeQuery();
-
-            // 결과값 적절히 불러와서 객체 생성
-            while (rs.next()) {
-                settlements.add( new Settlement(
-                        rs.getDate("settlementDate"),
-                        rs.getString("WorkPlace_has_User_WorkPlace_name"),
-                        rs.getString("WorkPlace_has_User_admin_id"),
-                        rs.getTimestamp("settlementTime")
-                        )
-                );
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                // 결과값 적절히 불러와서 객체 생성
+                while (rs.next()) {
+                    settlements.add(new Settlement(
+                                    rs.getDate("settlementDate"),
+                                    rs.getString("WorkPlace_has_User_WorkPlace_name"),
+                                    rs.getString("WorkPlace_has_User_admin_id"),
+                                    rs.getTimestamp("settlementTime")
+                            )
+                    );
+                }
             }
 
             // try 문 종료될때 close()가 필요한 항목들 자동 close() 수행됨 (connection은 DBCP에 반환)
-        }catch (Exception e) {
+        } catch (Exception e) {
             // 예외 처리
             e.printStackTrace();
         }
