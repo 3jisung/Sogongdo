@@ -22,7 +22,7 @@ public enum SettlementDAO {
         try (
                 // try 블럭 안에 connection과 statement 생성
                 Connection conn = DataBase.getConnection();
-                PreparedStatement preparedStatement = conn.prepareStatement(query);
+                PreparedStatement preparedStatement = conn.prepareStatement(query)
         ) {
             // ? 한곳에 파라메터 넣어줌
             preparedStatement.setString(1, work_place);
