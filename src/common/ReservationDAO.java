@@ -103,7 +103,7 @@ public class ReservationDAO {
 	}
 
 	public void deleteReservation(String reservationID) {
-		String sql = "delete from db.ReservationPayment where Reservation_id = ?";
+		String sql = "delete from db.Reservation where Reservation_id = ?";
 		try {
 			conn = ds.getConnection();
 			st = conn.createStatement();
@@ -116,7 +116,7 @@ public class ReservationDAO {
 	}
 	
 	public void updateReservationCancel(String reservationID, String cancelDate) {
-		String sql = "update db.ReservationPayment set cancelDate = ? where Reservation_id = ?";
+		String sql = "update db.Reservation set cancelDate = ? where Reservation_id = ?";
 		try {
 			conn = ds.getConnection();
 			st = conn.createStatement();

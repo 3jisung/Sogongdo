@@ -31,3 +31,5 @@ build/
 *.iml
 .idea/
 /bin/
+out/
+web/
