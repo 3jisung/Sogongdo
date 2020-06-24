@@ -1,4 +1,6 @@
-package model;
+package common;
+
+import model.WorkPlaceDTO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,7 +28,7 @@ public class WorkPlaceDAO {
 	public WorkPlaceDAO() {
 		try {
 			Context context = new InitialContext();
-			ds = (DataSource) context.lookup("java:comp/env/jdbc/MySQL");
+			// ds = (DataSource) context.lookup("java:comp/env/jdbc/MySQL");
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
