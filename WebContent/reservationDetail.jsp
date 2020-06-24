@@ -34,8 +34,6 @@ table th{
 }
 </style>
 
-<c:set var= "test" value= "${param.dto}" />
-
 
 <body>
 	<div align="center">

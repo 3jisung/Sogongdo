@@ -21,7 +21,7 @@ public class ReservationController extends HttpServlet{
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setAttribute("reservationList", dao.select());
+		req.setAttribute("reservationList", dao.readReservation());
 		ServletContext context = req.getServletContext();
 
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/reservation.jsp");
@@ -30,12 +30,6 @@ public class ReservationController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		String userID = req.getParameter("user");
-//		String workplaceID = req.getParameter("wrok");
-//		String facilityID = req.getParameter("fac");
-//		String date = req.getParameter("date");
-//		String people = req.getParameter("peo");
-//		String payment = req.getParameter("pay");
 		
 	}
 }
