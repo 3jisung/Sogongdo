@@ -17,6 +17,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+// 싱글톤 같은데 생성자를 public으로 두신 이유가 있나요? connection 획득은 DataBase.getConnection()으로 해주시면 감사하겠습니다. 그리고 테이블이나 컬럼 이름은 설계때 했던 이름대로 수정해주시기 바랍니다.
 public class WorkPlaceDAO {
 	private DataSource ds;
 	private static WorkPlaceDAO dao = new WorkPlaceDAO();
@@ -28,7 +29,7 @@ public class WorkPlaceDAO {
 	public WorkPlaceDAO() {
 		try {
 			Context context = new InitialContext();
-			// ds = (DataSource) context.lookup("java:comp/env/jdbc/MySQL");
+			ds = (DataSource) context.lookup("java:comp/env/jdbc/MySQL");
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
