@@ -18,7 +18,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class WorkPlaceDAO {
-	private DataSource DataBase;
+	// private DataSource DataBase;
 	private static WorkPlaceDAO dao = new WorkPlaceDAO();
 	
 	public static WorkPlaceDAO getInstance() {
@@ -28,7 +28,7 @@ public class WorkPlaceDAO {
 	private WorkPlaceDAO() {
 		try {
 			Context context = new InitialContext();
-			DataBase = (DataSource) context.lookup("java:comp/env/jdbc/MySQL");
+			// DataBase = (DataSource) context.lookup("java:comp/env/jdbc/MySQL");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -41,7 +41,7 @@ public class WorkPlaceDAO {
 		String preQuery = "INSERT INTO WorkPlace(name)"+ "VALUES (?)";
 		try {
 			conn = DataBase.getConnection();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -78,7 +78,7 @@ public class WorkPlaceDAO {
 		String preQuery = "UPDATE WorkPlace SET name=? WHERE name=?";
 		try {
 			conn = DataBase.getConnection();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -116,7 +116,7 @@ public class WorkPlaceDAO {
 		String preQuery = "DELETE FROM WorkPlace WHERE name=?";
 		try {
 			conn = DataBase.getConnection();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -208,7 +208,7 @@ public class WorkPlaceDAO {
 		String preQuery = "UPDATE WorkPlace SET state=?, tel=? WHERE name=?";
 		try {
 			conn = DataBase.getConnection();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -251,7 +251,7 @@ public class WorkPlaceDAO {
 		String preQuery = "UPDATE WorkPlace SET state=?, tel=? WHERE name=?";
 		try {
 			conn = DataBase.getConnection();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -296,7 +296,7 @@ public class WorkPlaceDAO {
 		String preQuery = "UPDATE WorkPlace SET state=null, tel=null WHERE name=?";
 		try {
 			conn = DataBase.getConnection();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 		try {
