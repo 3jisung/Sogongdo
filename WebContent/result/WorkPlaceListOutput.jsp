@@ -1,12 +1,12 @@
 <%@page import="model.WorkPlaceDTO"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>»ç¾÷Àå Á¶È¸</title>
+<meta charset="UTF-8">
+<title>ì‚¬ì—…ìž¥ ì¡°íšŒ</title>
 <style>
 .sidenav {
 	height: 100%;
@@ -61,14 +61,14 @@
 
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<a href="WorkPlaceCreate.jsp">»ç¾÷Àå Ãß°¡</a>
-		<a href="workplaceUpdateList.do">»ç¾÷Àå ¼öÁ¤</a> 
-		<a href="workplaceDeleteList.do">»ç¾÷Àå »èÁ¦</a> 
-		<a href="workplaceList.do">»ç¾÷Àå Á¶È¸</a>
-		<a href="workplaceInfoCreateList.do">»ç¾÷Àå ¼Ó¼º Ãß°¡</a> 
-		<a href="workplaceInfoUpdateList.do">»ç¾÷Àå ¼Ó¼º ¼öÁ¤</a>
-		<a href="workplaceInfoDeleteList.do">»ç¾÷Àå ¼Ó¼º »èÁ¦</a>
-		<a href="workplaceInfoList.do">»ç¾÷Àå ¼Ó¼º Á¶È¸</a>
+		<a href="WorkPlaceCreate.jsp">ì‚¬ì—…ìž¥ ì¶”ê°€</a>
+		<a href="workplaceUpdateList.do">ì‚¬ì—…ìž¥ ìˆ˜ì •</a> 
+		<a href="workplaceDeleteList.do">ì‚¬ì—…ìž¥ ì‚­ì œ</a> 
+		<a href="workplaceList.do">ì‚¬ì—…ìž¥ ì¡°íšŒ</a>
+		<a href="workplaceInfoCreateList.do">ì‚¬ì—…ìž¥ ì†ì„± ì¶”ê°€</a> 
+		<a href="workplaceInfoUpdateList.do">ì‚¬ì—…ìž¥ ì†ì„± ìˆ˜ì •</a>
+		<a href="workplaceInfoDeleteList.do">ì‚¬ì—…ìž¥ ì†ì„± ì‚­ì œ</a>
+		<a href="workplaceInfoList.do">ì‚¬ì—…ìž¥ ì†ì„± ì¡°íšŒ</a>
 	</div>
 
 
@@ -94,7 +94,7 @@
 	   <table border="1">
 	   	<thead>
 			<tr>
-				<td>»ç¾÷Àå¸í</td>
+				<td>ì‚¬ì—…ìž¥ëª…</td>
 			</tr>
 		</thead>
 			
@@ -107,7 +107,7 @@
 			       
 			<%   }
        }else{
-    	   out.print("<h3>µî·ÏµÈ »ç¾÷Àå Á¤º¸°¡ ¾ø½À´Ï´Ù.</h3>");
+    	   out.print("<h3>ë“±ë¡ëœ ì‚¬ì—…ìž¥ ì •ë³´ê°€ ì—†ìŠµë‹ˆë‹¤.</h3>");
        }
 	%>
 	  </table>
