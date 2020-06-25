@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>È¸¿ø Á¤º¸ ¼öÁ¤</title>
+<title>íšŒì› ì •ë³´ ìˆ˜ì •</title>
 <style>
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -34,7 +34,7 @@ footer, header, hgroup, menu, nav, section {
 }
 
 body {
-	font-family: "¸¼Àº °íµñ", "µ¸¿ò";
+	font-family: "ë§‘ì€ ê³ ë”•", "ë‹ì›€";
     text-align: center;
 	line-height: 1;
 }
@@ -123,7 +123,7 @@ textarea {
 </style>
 </head>
 <body>
-    <h1>È¸¿øÁ¤º¸¼öÁ¤</h1>
+    <h1>íšŒì›ì •ë³´ìˆ˜ì •</h1>
     <form action="UserControl" method="post" autocomplete="off">
         <div id="inputContainer">
             <div id="idCheckLabels">
@@ -133,20 +133,20 @@ textarea {
                 <input type="text" name="updateTargetId" id="updateTargetId" class="fields" autofocus>
             </div>
             <div id="idCheckButtons">
-                <button class="button" name="btn" value="idCheckBtn">È®ÀÎ</button>
-                <button class="button" type="button" onclick="location.href='index.jsp';">Ãë¼Ò</button>
+                <button class="button" name="btn" value="idCheckBtn">í™•ì¸</button>
+                <button class="button" type="button" onclick="location.href='index.jsp';">ì·¨ì†Œ</button>
             </div>
         </div>
         <c:forEach var="list" items="${updateList}">
         <div id="resultContainer">
             <div id="updateLabels">
                 <label for="updateId">ID</label><br><br>
-                <label for="updatePwd">ºñ¹Ğ¹øÈ£</label><br><br>
-                <label for="updateName">ÀÌ¸§</label><br><br>
-                <label for="updateAddress">ÁÖ¼Ò</label><br><br>
-                <label for="updateBirth">»ı³â¿ùÀÏ</label><br><br>
-                <label for="updatePhone">ÈŞ´ëÀüÈ­¹øÈ£</label><br><br>
-                <label for="updateEmail">ÀÌ¸ŞÀÏ</label>
+                <label for="updatePwd">ë¹„ë°€ë²ˆí˜¸</label><br><br>
+                <label for="updateName">ì´ë¦„</label><br><br>
+                <label for="updateAddress">ì£¼ì†Œ</label><br><br>
+                <label for="updateBirth">ìƒë…„ì›”ì¼</label><br><br>
+                <label for="updatePhone">íœ´ëŒ€ì „í™”ë²ˆí˜¸</label><br><br>
+                <label for="updateEmail">ì´ë©”ì¼</label>
             </div>
             <div id="updateFields">
                 <input type="text" name="updateId" id="updateId" class="fields" value="${list.getId()}" readonly><br><br>
@@ -155,10 +155,10 @@ textarea {
                 <textarea name="updateAddress" id="updateAddress" cols="30" rows="2" required>${list.getAddress()}</textarea><br><br>
                 <input type="date" name="updateBirth" id="updateBirth" class="fields" value="${list.getBirth()}" disabled><br><br>
                 <input type="tel" pattern="[0]{1}[1]{1}[0]{1}-[0-9]{4}-[0-9]{4}" name="updatePhone" id="updatePhone" class="fields" placeholder="010-XXXX-XXXX" value="${list.getPhoneNumber()}"><br><br>
-                <input type="email" name="updateEmail" id="updateEmail" class="fields" value="${list.geteMail()}">
+                <input type="email" name="updateEmail" id="updateEmail" class="fields" value="${list.getEmail()}">
             </div>
             <div id="updateButtons">
-                <button class="button" name="btn" value="updateBtn">¼öÁ¤</button>
+                <button class="button" name="btn" value="updateBtn">ìˆ˜ì •</button>
             </div>
         </div>
         </c:forEach>
