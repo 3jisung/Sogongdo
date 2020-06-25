@@ -36,6 +36,32 @@ public class ReservationDAO {
 		return list;
 	}
 
+	public Reservation searchReservation(String id) {
+		Reservation r = null;
+		String sql = "SELECT * FROM db.Reservation WHERE Reservation_id = '" + id + "'";
+		try (
+				Connection conn = DataBase.getConnection();
+				PreparedStatement pst = conn.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery();
+		)	{
+			
+			if (rs.next())
+				r = new Reservation(
+						rs.getString("Reservation_id"),
+						rs.getString("User_id"),
+						rs.getString("Facility_id"),
+						rs.getString("Payment_id"),
+						rs.getString("startDate"),
+						rs.getString("endDate"),
+						rs.getString("people"),
+						rs.getString("registerDate"),
+						rs.getString("cancelDate"));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return r;
+	}
 	public void createReservation(Reservation r) {
 		String sql = "insert into db.Reservation values (?,?,?,?,?,?,?,?,?)";
 
@@ -44,7 +70,7 @@ public class ReservationDAO {
 				PreparedStatement pst = conn.prepareStatement(sql);
 		)	{
 			// auto increment
-			pst.setInt(1, (Integer) null);
+			pst.setString(1, null);
 			pst.setString(2, r.getUserID());
 			pst.setString(3, r.getFacilityID());
 			pst.setString(4, r.getPaymentID());
@@ -60,17 +86,17 @@ public class ReservationDAO {
 		}
 	}
 
-	public void updateReservation(Reservation r) {
+	public void updateReservation(String id, String startDate, String endDate, String people, String registerDate) {
 		String sql = "update db.Reservation set startDate = ?, endDate = ?, people = ?, registerDate = ? where Reservation_id = ?";
 		try (
 				Connection conn = DataBase.getConnection();
 				PreparedStatement pst = conn.prepareStatement(sql);
 		)	{
-			pst.setString(1, r.getStartDate());
-			pst.setString(2, r.getEndDate());
-			pst.setString(3, r.getPeople());
-			pst.setString(4, r.getRegisterDate());
-			pst.setInt(5, Integer.parseInt(r.getId()));
+			pst.setString(1, startDate);
+			pst.setString(2, endDate);
+			pst.setString(3, people);
+			pst.setString(4, registerDate);
+			pst.setInt(5, Integer.parseInt(id));
 			pst.executeUpdate();
 		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
