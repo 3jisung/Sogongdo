@@ -4,7 +4,7 @@ import controller.*;
 import java.util.ArrayList;
 
 import model.*;
-import model.WorkPlaceDAO;
+import common.WorkPlaceDAO;
 
 public class WorkPlaceService {
 	private static WorkPlaceService service = new WorkPlaceService();

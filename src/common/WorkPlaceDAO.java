@@ -1,4 +1,6 @@
-package model;
+package common;
+
+import model.WorkPlaceDTO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,7 +18,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class WorkPlaceDAO {
-	private DataSource DataBase;
+	// private DataSource DataBase;
 	private static WorkPlaceDAO dao = new WorkPlaceDAO();
 	
 	public static WorkPlaceDAO getInstance() {
@@ -26,7 +28,7 @@ public class WorkPlaceDAO {
 	private WorkPlaceDAO() {
 		try {
 			Context context = new InitialContext();
-			DataBase = (DataSource) context.lookup("java:comp/env/jdbc/MySQL");
+			// DataBase = (DataSource) context.lookup("java:comp/env/jdbc/MySQL");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -36,10 +38,10 @@ public class WorkPlaceDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String preQuery = "INSERT INTO workplace(name)"+ "VALUES (?)";
+		String preQuery = "INSERT INTO WorkPlace(name)"+ "VALUES (?)";
 		try {
 			conn = DataBase.getConnection();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -73,10 +75,10 @@ public class WorkPlaceDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String preQuery = "UPDATE workplace SET name=? WHERE name=?";
+		String preQuery = "UPDATE WorkPlace SET name=? WHERE name=?";
 		try {
 			conn = DataBase.getConnection();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -111,10 +113,10 @@ public class WorkPlaceDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String preQuery = "DELETE FROM workplace WHERE name=?"; 
+		String preQuery = "DELETE FROM WorkPlace WHERE name=?";
 		try {
 			conn = DataBase.getConnection();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -160,7 +162,7 @@ public class WorkPlaceDAO {
 
 		try {
 			conn = DataBase.getConnection();
-			pstmt = conn.prepareStatement("SELECT * FROM workplace");
+			pstmt = conn.prepareStatement("SELECT * FROM WorkPlace");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				workplace = new WorkPlaceDTO();
@@ -203,10 +205,10 @@ public class WorkPlaceDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String preQuery = "UPDATE workplace SET state=?, tel=? WHERE name=?";
+		String preQuery = "UPDATE WorkPlace SET state=?, tel=? WHERE name=?";
 		try {
 			conn = DataBase.getConnection();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -246,10 +248,10 @@ public class WorkPlaceDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String preQuery = "UPDATE workplace SET state=?, tel=? WHERE name=?"; 
+		String preQuery = "UPDATE WorkPlace SET state=?, tel=? WHERE name=?";
 		try {
 			conn = DataBase.getConnection();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -291,10 +293,10 @@ public class WorkPlaceDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String preQuery = "UPDATE workplace SET state=null, tel=null WHERE name=?";
+		String preQuery = "UPDATE WorkPlace SET state=null, tel=null WHERE name=?";
 		try {
 			conn = DataBase.getConnection();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -346,7 +348,7 @@ public class WorkPlaceDAO {
 
 		try {
 			conn = DataBase.getConnection();
-			pstmt = conn.prepareStatement("SELECT * FROM workplace, WorkPlaceManager WHERE workplace.name = WorkPlaceManager.workplace_name");
+			pstmt = conn.prepareStatement("SELECT * FROM WorkPlace, WorkPlaceManager WHERE WorkPlace.name = WorkPlaceManager.workplace_name");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				workplace = new WorkPlaceDTO();
