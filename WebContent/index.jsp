@@ -50,6 +50,10 @@
 		<li><a href="deleteUser.jsp">회원정보삭제</a></li>
 		<li><a href="readUser.jsp">회원정보조회</a></li>
 		<li><a href="Authority.jsp">권한 관리</a></li>
+		<li><a href="settlement.jsp">정산 관리</a></li>
+		<li><a href="reservation.jsp">예약 관리</a></li>
+		<li><a href="Facility.jsp">시설 관리</a></li>
+		<li><a href="workplaceMain.jsp">사업장 관리</a></li>
 		<li></li>
 		<li></li>
 	</ul>
