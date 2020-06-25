@@ -1,3 +1,8 @@
+<%@ page import="java.util.List" %>
+<%@ page import="model.FacilityDTO" %>
+<%@ page import="model.FacilityDAO" %>
+<%@ page import="model.WorkPlaceDTO" %>
+<%@ page import="common.WorkPlaceDAO" %>
 <%@page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="utf-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -61,7 +66,13 @@
                 <th>시설</th>
                 <th>
                     <select name="facility">
-                        <option>여기서 시설 select 해서 이름 가져와야함</option>
+                        <%
+                            List<WorkPlaceDTO> list = WorkPlaceDAO.getInstance().workplaceList();
+                            for (WorkPlaceDTO workplace : list
+                                 ) {
+                                out.println("<option>" + workplace.getName() + "</option>");
+                            }
+                        %>
                     </select>
                 </th>
             </tr>
