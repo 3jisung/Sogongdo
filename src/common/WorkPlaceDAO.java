@@ -51,13 +51,6 @@ public class WorkPlaceDAO {
 		} catch (SQLException e) {
 			System.out.println("[SQL Error : " + e.getMessage() + "]");
 		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
 			if(pstmt != null) {
 				try {
 					pstmt.close();
@@ -65,7 +58,13 @@ public class WorkPlaceDAO {
 					System.out.println("close 오류 " + ex);
 				}
 			}
-		
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
 	}
@@ -90,18 +89,18 @@ public class WorkPlaceDAO {
 		} catch (SQLException e) {
 			System.out.println("[SQL Error : " + e.getMessage() + "]");
 		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
 			if(pstmt != null) {
 				try {
 					pstmt.close();
 				}catch(Exception ex) {
 					System.out.println("close 오류 " + ex);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}
@@ -127,18 +126,18 @@ public class WorkPlaceDAO {
 		} catch (SQLException e) {
 			System.out.println("[SQL Error : " + e.getMessage() + "]");
 		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
 			if(pstmt != null) {
 				try {
 					pstmt.close();
 				}catch(Exception ex) {
 					System.out.println("close 오류 " + ex);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}
@@ -173,11 +172,11 @@ public class WorkPlaceDAO {
 		} catch (Exception ex) {
 			System.out.println("오류 발생 : " + ex);
 		} finally {
-			if (conn != null) {
+			if(rs != null) {
 				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
+					rs.close();
+				}catch(Exception ex) {
+					System.out.println("close 오류 " + ex);
 				}
 			}
 			if(pstmt != null) {
@@ -187,11 +186,11 @@ public class WorkPlaceDAO {
 					System.out.println("close 오류 " + ex);
 				}
 			}
-			if(rs != null) {
+			if (conn != null) {
 				try {
-					rs.close();
-				}catch(Exception ex) {
-					System.out.println("close 오류 " + ex);
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}
@@ -226,13 +225,6 @@ public class WorkPlaceDAO {
 		} catch (SQLException e) {
 			System.out.println("[SQL Error : " + e.getMessage() + "]");
 		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
 			if(pstmt != null) {
 				try {
 					pstmt.close();
@@ -240,7 +232,13 @@ public class WorkPlaceDAO {
 					System.out.println("close 오류 " + ex);
 				}
 			}
-			
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
@@ -271,6 +269,13 @@ public class WorkPlaceDAO {
 		} catch (SQLException e) {
 			System.out.println("[SQL Error : " + e.getMessage() + "]");
 		} finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(Exception ex) {
+					System.out.println("close 오류 " + ex);
+				}
+			}
 			if (conn != null) {
 				try {
 					conn.close();
@@ -307,6 +312,13 @@ public class WorkPlaceDAO {
 		} catch (SQLException e) {
 			System.out.println("[SQL Error : " + e.getMessage() + "]");
 		} finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(Exception ex) {
+					System.out.println("close 오류 " + ex);
+				}
+			}
 			if (conn != null) {
 				try {
 					conn.close();
@@ -349,11 +361,11 @@ public class WorkPlaceDAO {
 		} catch (Exception ex) {
 			System.out.println("오류 발생 : " + ex);
 		} finally {
-			if (conn != null) {
+			if(rs != null) {
 				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
+					rs.close();
+				}catch(Exception ex) {
+					System.out.println("close 오류 " + ex);
 				}
 			}
 			if(pstmt != null) {
@@ -363,11 +375,11 @@ public class WorkPlaceDAO {
 					System.out.println("close 오류 " + ex);
 				}
 			}
-			if(rs != null) {
+			if (conn != null) {
 				try {
-					rs.close();
-				}catch(Exception ex) {
-					System.out.println("close 오류 " + ex);
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}
