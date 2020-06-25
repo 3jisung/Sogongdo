@@ -148,7 +148,7 @@
 			<input type="submit" value="확인">
 		</fieldset>
 	</form>
-	
+
 	<form method="post" action="AuthorityDelete.jsp">
 		<fieldset>
 			<legend>삭제</legend>
