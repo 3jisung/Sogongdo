@@ -39,14 +39,16 @@ public enum SettlementDAO {
 
     public List<Settlement> selectSettlements(String work_place, Date start_date, Date end_date) {
         final List<Settlement> settlements = new ArrayList<>();
-
+        String default_query =
+                "select * from db.Settlement";
         String query =
                 "select * from db.Settlement " +
-                " where `WorkPlace_has_User_WorkPlace_name` = ? and " +
-                "       `settlementDate` between ? and ?";
+                        " where `WorkPlace_has_User_WorkPlace_name` = ? and " +
+                        "       `settlementDate` between ? and ?";
+
         try (
                 Connection conn = DataBase.getConnection();
-                PreparedStatement preparedStatement = conn.prepareStatement(query)
+                PreparedStatement preparedStatement = conn.prepareStatement(query);
         ) {
             preparedStatement.setString(1, work_place);
             preparedStatement.setDate(2, start_date);
@@ -76,10 +78,10 @@ public enum SettlementDAO {
         int result = 0;
         String query =
                 "update db.Settlement " +
-                "   set settlementTime = ?" +
-                " where settlementDate = ? and " +
-                "       WorkPlace_has_User_WorkPlace_name = ? and" +
-                "       WorkPlace_has_User_admin_id = ?";
+                        "   set settlementTime = ?" +
+                        " where settlementDate = ? and " +
+                        "       WorkPlace_has_User_WorkPlace_name = ? and" +
+                        "       WorkPlace_has_User_admin_id = ?";
         try (
                 Connection conn = DataBase.getConnection();
                 PreparedStatement preparedStatement = conn.prepareStatement(query)
@@ -101,9 +103,9 @@ public enum SettlementDAO {
         int result = 0;
         String query =
                 "delete from db.Settlement " +
-                " where settlementDate = ? and " +
-                "       WorkPlace_has_User_WorkPlace_name = ? and" +
-                "       WorkPlace_has_User_admin_id = ?";
+                        " where settlementDate = ? and " +
+                        "       WorkPlace_has_User_WorkPlace_name = ? and" +
+                        "       WorkPlace_has_User_admin_id = ?";
         try (
                 Connection conn = DataBase.getConnection();
                 PreparedStatement preparedStatement = conn.prepareStatement(query)

@@ -3,6 +3,11 @@
 <%@ page import="model.FacilityDAO" %>
 <%@ page import="model.WorkPlaceDTO" %>
 <%@ page import="common.WorkPlaceDAO" %>
+<%@ page import="model.Settlement" %>
+<%@ page import="common.SettlementDAO" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.sql.Date" %>
+<%@ page import="java.sql.Timestamp" %>
 <%@page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="utf-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -52,23 +57,22 @@
 <hr width="80%" color="lightgray" noshade/>
 
 <div align="center">
-    <h2 style="margin-bottom: -0.05rem;">Settlement Management 정산 관리</h2>
-    <small>정산설명 블라블라</small>
+    <h2 style="margin-bottom: -0.05rem;">정산</h2>
+    <!--<small>정산설명 블라블라</small>-->
 
-    <!-- 결제화면으로 넘어가야 한다 -->
     <form method="post" action="createSettlement.jsp">
         <table style="margin-top: 10px;">
             <tr>
                 <th>ID</th>
-                <th><input type="text" id="userID"></input></th>
+                <th><input type="text" id="userID"/></th>
             </tr>
             <tr>
                 <th>시설</th>
                 <th>
                     <select name="facility">
                         <%
-                            List<WorkPlaceDTO> list = WorkPlaceDAO.getInstance().workplaceList();
-                            for (WorkPlaceDTO workplace : list
+                            List<WorkPlaceDTO> workplace_list = WorkPlaceDAO.getInstance().workplaceList();
+                            for (WorkPlaceDTO workplace : workplace_list
                                  ) {
                                 out.println("<option>" + workplace.getName() + "</option>");
                             }
@@ -90,6 +94,34 @@
         </table>
         <br>
         <button>정산</button>
+        <p> ${param.message} </p>
+    </form>
+    <br>
+    <h2 style="margin-bottom: -0.05rem;">정산 조회</h2>
+    <form method="post" action="settlement.jsp">
+        <table style="margin-top: 10px;">
+            <tr>
+                <th>시설</th>
+                <th>
+                    <select name="facility">
+                        <%
+                            //List<WorkPlaceDTO> workplace_list = WorkPlaceDAO.getInstance().workplaceList();
+                            for (WorkPlaceDTO workplace : workplace_list
+                            ) {
+                                out.println("<option>" + workplace.getName() + "</option>");
+                            }
+                        %>
+                    </select>
+                </th>
+            </tr>
+            <tr>
+                <th>정산일 범위</th>
+                <th>
+                    <input type="date" name="settlement_date_start"> ~ <input type="date" name="settlement_date_end">
+                </th>
+            </tr>
+        </table>
+        <br>
         <button>정산 조회</button>
         <p> ${param.message} </p>
     </form>
@@ -109,23 +141,28 @@
             <td>정산시간</td>
         </tr>
         </thead>
-        <c:forEach var="dto" items="${reservationList}">
-            <c:url value="/readSettlement.jsp" var="url">
-                <c:param name="workplace" value="${dto.workplace}"/>
-                <c:param name="admin_id" value="${dto.admin_id}"/>
-                <c:param name="date" value="${dto.settlement_date}"/>
-                <c:param name="time" value="${dto.processed_time}"/>
-            </c:url>
-            <tr>
-                <td onclick="location.href='${url}'" style="cursor:pointer">
-                        ${dto.id}
-                </td>
-                <td>${dto.workplace}</td>
-                <td>${dto.admin_id}</td>
-                <td>${dto.settlement_date}</td>
-                <td>${dto.processed_time}</td>
-            </tr>
-        </c:forEach>
+        <!--
+        <%/*
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            request.setCharacterEncoding("UTF-8");
+            String facility = request.getParameter("facility") == null ? workplace_list.get(0).getName() : request.getParameter("facility");
+            String start = request.getParameter("settlement_date_start") == null ? sdf.format(new java.util.Date(System.currentTimeMillis() - 7L * 24 * 3600 * 1000)) : request.getParameter("settlement_date_start");
+            String end = request.getParameter("settlement_date_end") == null ? sdf.format(new java.util.Date()) : request.getParameter("settlement_date_end");
+
+            List<Settlement> list = SettlementDAO.INSTANCE.selectSettlements(facility, Date.valueOf(start), Date.valueOf(end));
+            for (Settlement s : list) {
+                pageContext.setAttribute("item", s);
+        */%>
+        <tr>
+            <td>${item.workplace}</td>
+            <td>${item.admin_id}</td>
+            <td>${item.settlement_date}</td>
+            <td>${item.processed_time}</td>
+        </tr>
+        <%
+        //}
+        %>
+        -->
     </table>
 </div>
 </body>
