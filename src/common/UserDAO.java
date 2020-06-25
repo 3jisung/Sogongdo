@@ -19,7 +19,7 @@ public class UserDAO {
 	public UserDAO() {
 		try {
 			Context context = new InitialContext();
-			ds = (DataSource)context.lookup("java:comp/env/jdbc/MySQL");
+			ds = (DataSource)context.lookup("java:comp/env/jdbc/db");
 			conn = null;
 			pstmt = null;
 			rs = null;
