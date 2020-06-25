@@ -1,6 +1,4 @@
-package common;
-
-import model.WorkPlaceDTO;
+package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,21 +15,19 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-// 싱글톤 같은데 생성자를 public으로 두신 이유가 있나요? connection 획득은 DataBase.getConnection()으로 해주시면 감사하겠습니다. 그리고 테이블이나 컬럼 이름은 설계때 했던 이름대로 수정해주시기 바랍니다.
 public class WorkPlaceDAO {
-	private DataSource ds;
+	private DataSource DataBase;
 	private static WorkPlaceDAO dao = new WorkPlaceDAO();
 	
 	public static WorkPlaceDAO getInstance() {
 		return dao;
 	}
 
-	public WorkPlaceDAO() {
+	private WorkPlaceDAO() {
 		try {
 			Context context = new InitialContext();
-			ds = (DataSource) context.lookup("java:comp/env/jdbc/MySQL");
+			DataBase = (DataSource) context.lookup("java:comp/env/jdbc/MySQL");
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -42,9 +38,8 @@ public class WorkPlaceDAO {
 		
 		String preQuery = "INSERT INTO workplace(name)"+ "VALUES (?)";
 		try {
-			conn = ds.getConnection();
+			conn = DataBase.getConnection();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
@@ -63,6 +58,14 @@ public class WorkPlaceDAO {
 					e.printStackTrace();
 				}
 			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(Exception ex) {
+					System.out.println("close 오류 " + ex);
+				}
+			}
+		
 		}
 		
 	}
@@ -73,7 +76,7 @@ public class WorkPlaceDAO {
 		
 		String preQuery = "UPDATE workplace SET name=? WHERE name=?";
 		try {
-			conn = ds.getConnection();
+			conn = DataBase.getConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -94,6 +97,13 @@ public class WorkPlaceDAO {
 					e.printStackTrace();
 				}
 			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(Exception ex) {
+					System.out.println("close 오류 " + ex);
+				}
+			}
 		}
 		
 	}
@@ -104,7 +114,7 @@ public class WorkPlaceDAO {
 		
 		String preQuery = "DELETE FROM workplace WHERE name=?"; 
 		try {
-			conn = ds.getConnection();
+			conn = DataBase.getConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -122,6 +132,13 @@ public class WorkPlaceDAO {
 					conn.close();
 				} catch (Exception e) {
 					e.printStackTrace();
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(Exception ex) {
+					System.out.println("close 오류 " + ex);
 				}
 			}
 		}
@@ -143,7 +160,7 @@ public class WorkPlaceDAO {
 		WorkPlaceDTO workplace = null;
 
 		try {
-			conn = ds.getConnection();
+			conn = DataBase.getConnection();
 			pstmt = conn.prepareStatement("SELECT * FROM workplace");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -163,6 +180,20 @@ public class WorkPlaceDAO {
 					e.printStackTrace();
 				}
 			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(Exception ex) {
+					System.out.println("close 오류 " + ex);
+				}
+			}
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(Exception ex) {
+					System.out.println("close 오류 " + ex);
+				}
+			}
 		}
 		
 		return list;
@@ -175,9 +206,8 @@ public class WorkPlaceDAO {
 		
 		String preQuery = "UPDATE workplace SET state=?, tel=? WHERE name=?";
 		try {
-			conn = ds.getConnection();
+			conn = DataBase.getConnection();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
@@ -188,7 +218,7 @@ public class WorkPlaceDAO {
 			pstmt.executeUpdate();
 			pstmt=null;
 			
-			String preQuery2 = "INSERT INTO workplace_has_user(admin_id, workPlace_name)"+ "VALUES (?,?)";
+			String preQuery2 = "INSERT INTO WorkPlaceManager(admin_id, workPlace_name)"+ "VALUES (?,?)";
 			pstmt = conn.prepareStatement(preQuery2); 
 			pstmt.setString(1, workplaceDto.getAdmin());
 			pstmt.setString(2, workplaceDto.getName());
@@ -203,6 +233,14 @@ public class WorkPlaceDAO {
 					e.printStackTrace();
 				}
 			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(Exception ex) {
+					System.out.println("close 오류 " + ex);
+				}
+			}
+			
 		}
 	}
 
@@ -212,7 +250,7 @@ public class WorkPlaceDAO {
 		
 		String preQuery = "UPDATE workplace SET state=?, tel=? WHERE name=?"; 
 		try {
-			conn = ds.getConnection();
+			conn = DataBase.getConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -224,7 +262,7 @@ public class WorkPlaceDAO {
 			pstmt.executeUpdate();
 			pstmt=null;
 			
-			preQuery = "UPDATE workplace_has_user SET admin_id=? WHERE workPlace_name=?";
+			preQuery = "UPDATE WorkPlaceManager SET admin_id=? WHERE workPlace_name=?";
 			pstmt = conn.prepareStatement(preQuery); 
 			pstmt.setString(1, workplace.getAdmin());
 			pstmt.setString(2, workplace.getName());
@@ -250,7 +288,7 @@ public class WorkPlaceDAO {
 		
 		String preQuery = "UPDATE workplace SET state=null, tel=null WHERE name=?";
 		try {
-			conn = ds.getConnection();
+			conn = DataBase.getConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -260,7 +298,7 @@ public class WorkPlaceDAO {
 			pstmt.executeUpdate();
 			pstmt=null;
 			
-			preQuery = "DELETE FROM workplace_has_user WHERE workPlace_name=?";
+			preQuery = "DELETE FROM WorkPlaceManager WHERE workPlace_name=?";
 			pstmt = conn.prepareStatement(preQuery); 
 			pstmt.setString(1, name);		
 			pstmt.executeUpdate();
@@ -295,8 +333,8 @@ public class WorkPlaceDAO {
 		WorkPlaceDTO workplace = null;
 
 		try {
-			conn = ds.getConnection();
-			pstmt = conn.prepareStatement("SELECT * FROM workplace, workplace_has_user WHERE workplace.name = workplace_has_user.workplace_name");
+			conn = DataBase.getConnection();
+			pstmt = conn.prepareStatement("SELECT * FROM workplace, WorkPlaceManager WHERE workplace.name = WorkPlaceManager.workplace_name");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				workplace = new WorkPlaceDTO();
@@ -316,6 +354,20 @@ public class WorkPlaceDAO {
 					conn.close();
 				} catch (Exception e) {
 					e.printStackTrace();
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				}catch(Exception ex) {
+					System.out.println("close 오류 " + ex);
+				}
+			}
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch(Exception ex) {
+					System.out.println("close 오류 " + ex);
 				}
 			}
 		}
