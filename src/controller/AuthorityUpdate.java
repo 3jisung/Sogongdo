@@ -17,13 +17,16 @@ public class AuthorityUpdate extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws
 	ServletException, IOException {
 		PrintWriter out = resp.getWriter();
-		int id = Integer.parseInt(req.getParameter("id"));
+		String originTarget = req.getParameter("originTarget");
+		String originAction = req.getParameter("originAction");
 		String target = req.getParameter("target");
 		String action = req.getParameter("action");
-		
+
+		out.printf("target: %s\n", originTarget);
+		out.printf("action: %s\n", originAction);
 		out.printf("target: %s\n", target);
 		out.printf("action: %s\n", action);
-		AuthorityDAO.INSTANCE.updateAuthority(id, target, action);
+		AuthorityDAO.INSTANCE.updateAuthority(originTarget, originAction, target, action);
 		out.printf("done\n");
 	}
 }

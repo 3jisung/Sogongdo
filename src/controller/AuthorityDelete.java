@@ -17,10 +17,12 @@ public class AuthorityDelete extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws
 	ServletException, IOException {
 		PrintWriter out = resp.getWriter();
-		int id = Integer.parseInt(req.getParameter("id"));
-		
-		out.printf("target: %s\n", id);
-		AuthorityDAO.INSTANCE.deleteAuthority(id);
+		String target = req.getParameter("target");
+		String action = req.getParameter("action");
+
+		out.printf("target: %s\n", target);
+		out.printf("action: %s\n", action);
+		AuthorityDAO.INSTANCE.deleteAuthority(target, action);
 		out.printf("done\n");
 	}
 }
