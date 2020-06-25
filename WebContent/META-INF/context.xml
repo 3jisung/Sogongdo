@@ -2,7 +2,7 @@
 <Context path="/">
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
     <Resource name="jdbc/db" auth="Container" type="javax.sql.DataSource"
-              maxActive="10" maxIdle="3" maxWait="10000"
+              maxTotal="10" maxIdle="3" maxWaitMillis="10000"
               username="root" password="0OSE!"
               driverClassName="com.mysql.cj.jdbc.Driver"
               url="jdbc:mysql://m72e.iptime.org:33061/db"

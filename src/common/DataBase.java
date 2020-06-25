@@ -9,12 +9,15 @@ import java.sql.SQLException;
 public final class DataBase {
     private static DataSource ds;
 
-    private DataBase() throws NamingException {
-        InitialContext initialContext = new InitialContext();
-        ds = (DataSource) initialContext.lookup("java:comp/env/jdbc/db");
+    private DataBase() {
     }
 
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException, NamingException {
+        if (ds == null) {
+            InitialContext initialContext = new InitialContext();
+            ds = (DataSource) initialContext.lookup("java:comp/env/jdbc/db");
+        }
+
         return ds.getConnection();
     }
 }

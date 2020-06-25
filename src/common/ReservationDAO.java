@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import model.Reservation;
 
+import javax.naming.NamingException;
+
 public class ReservationDAO {
 
 	public ArrayList<Reservation> readReservation() {
@@ -28,7 +30,7 @@ public class ReservationDAO {
 						rs.getString("registerDate"),
 						rs.getString("cancelDate")));
 			
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 		return list;
@@ -53,7 +55,7 @@ public class ReservationDAO {
 			pst.setString(9, r.getCancelDate());
 			pst.executeUpdate();
 
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 	}
@@ -70,7 +72,7 @@ public class ReservationDAO {
 			pst.setString(4, r.getRegisterDate());
 			pst.setInt(5, Integer.parseInt(r.getId()));
 			pst.executeUpdate();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 	}
@@ -83,7 +85,7 @@ public class ReservationDAO {
 		)	{
 			pst.setString(1, reservationID);
 			pst.executeUpdate();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 	}
@@ -97,7 +99,7 @@ public class ReservationDAO {
 			pst.setString(1, cancelDate);
 			pst.setString(2, reservationID);
 			pst.executeUpdate();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 	}
