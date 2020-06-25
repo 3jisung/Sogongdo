@@ -1,4 +1,6 @@
-package model;
+package common;
+
+import model.WorkPlaceDTO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -36,7 +38,7 @@ public class WorkPlaceDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String preQuery = "INSERT INTO workplace(name)"+ "VALUES (?)";
+		String preQuery = "INSERT INTO WorkPlace(name)"+ "VALUES (?)";
 		try {
 			conn = DataBase.getConnection();
 		} catch (SQLException e) {
@@ -73,7 +75,7 @@ public class WorkPlaceDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String preQuery = "UPDATE workplace SET name=? WHERE name=?";
+		String preQuery = "UPDATE WorkPlace SET name=? WHERE name=?";
 		try {
 			conn = DataBase.getConnection();
 		} catch (SQLException e) {
@@ -111,7 +113,7 @@ public class WorkPlaceDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String preQuery = "DELETE FROM workplace WHERE name=?"; 
+		String preQuery = "DELETE FROM WorkPlace WHERE name=?";
 		try {
 			conn = DataBase.getConnection();
 		} catch (SQLException e) {
@@ -160,7 +162,7 @@ public class WorkPlaceDAO {
 
 		try {
 			conn = DataBase.getConnection();
-			pstmt = conn.prepareStatement("SELECT * FROM workplace");
+			pstmt = conn.prepareStatement("SELECT * FROM WorkPlace");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				workplace = new WorkPlaceDTO();
@@ -203,7 +205,7 @@ public class WorkPlaceDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String preQuery = "UPDATE workplace SET state=?, tel=? WHERE name=?";
+		String preQuery = "UPDATE WorkPlace SET state=?, tel=? WHERE name=?";
 		try {
 			conn = DataBase.getConnection();
 		} catch (SQLException e) {
@@ -246,7 +248,7 @@ public class WorkPlaceDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String preQuery = "UPDATE workplace SET state=?, tel=? WHERE name=?"; 
+		String preQuery = "UPDATE WorkPlace SET state=?, tel=? WHERE name=?";
 		try {
 			conn = DataBase.getConnection();
 		} catch (SQLException e) {
@@ -291,7 +293,7 @@ public class WorkPlaceDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String preQuery = "UPDATE workplace SET state=null, tel=null WHERE name=?";
+		String preQuery = "UPDATE WorkPlace SET state=null, tel=null WHERE name=?";
 		try {
 			conn = DataBase.getConnection();
 		} catch (SQLException e) {
@@ -346,7 +348,7 @@ public class WorkPlaceDAO {
 
 		try {
 			conn = DataBase.getConnection();
-			pstmt = conn.prepareStatement("SELECT * FROM workplace, WorkPlaceManager WHERE workplace.name = WorkPlaceManager.workplace_name");
+			pstmt = conn.prepareStatement("SELECT * FROM WorkPlace, WorkPlaceManager WHERE WorkPlace.name = WorkPlaceManager.workplace_name");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				workplace = new WorkPlaceDTO();
