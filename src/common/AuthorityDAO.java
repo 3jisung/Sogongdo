@@ -13,7 +13,7 @@ public enum AuthorityDAO {
 	String authorityTableName = "db.Authority";
 	
 	public void createAuthority(String target, String action) {
-		String query = "insert into " + authorityTableName + "(target, action) values ('?', '?')";
+		String query = "insert into " + authorityTableName + " (target, action) values (?, ?)";
 		
 		try (
 				Connection conn = DataBase.getConnection();
