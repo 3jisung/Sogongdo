@@ -39,7 +39,7 @@ public class ProductPaymentDAO {
 	
 	/*구매내역확인*/
 	public ArrayList<ProductPayment> read() {
-		String sql = "SELECT * FROM ProductPayment";
+		String sql = "SELECT * FROM db.ProductPayment";
 		ArrayList<ProductPayment> list = new ArrayList<ProductPayment>();
 		
 		try {
@@ -56,35 +56,85 @@ public class ProductPaymentDAO {
 				String User_id = rs.getString("User_id");
 				Integer quantity = rs.getInt("quantity");
 				LocalDateTime saleDate = rs.getTimestamp("saleDate").toLocalDateTime();
-				 ProductPayment instance = new ProductPayment(ProductPackage_name, User_id, quantity, saleDate);
+				ProductPayment instance = new ProductPayment(ProductPackage_name, User_id, quantity, saleDate);
 				list.add(instance);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 		return list;
 	}
 	
 	/*상품구매*/
 	public boolean createProductPayment(String ProductPackage_name, String User_id, int quantity) throws SQLException {
-		String sql = "INSERT INTO ProductPayment VALUES (?,?,?,now())";
-		if (findProductPackage(ProductPackage_name)==true) {
-			try {
-				conn = ds.getConnection();
-				pst = conn.prepareStatement(sql);
-				pst.setString(1, ProductPackage_name);
-				pst.setString(2, User_id);
-				pst.setInt(3, quantity);
-				pst.executeUpdate();
-				
-			} catch (SQLException e) {e.printStackTrace();}
-				return true;
-		}
-		else return false;
+		String sql = "INSERT INTO db.ProductPayment VALUES (?,?,?,now())";
+		boolean res = false;	
+		
+		try {
+			if (findProductPackage(ProductPackage_name)==true) {
+					conn = ds.getConnection();
+					pst = conn.prepareStatement(sql);
+					pst.setString(1, ProductPackage_name);
+					pst.setString(2, User_id);
+					pst.setInt(3, quantity);
+					pst.executeUpdate();
+					res = true;
+			}
+			else res= false;
+			
+		} catch (SQLException e) {e.printStackTrace();
+		} finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+		return res;
+
 	}
 	/*총 구매실적 불러오기*/
 	public int total() {
-		String sql = "SELECT SUM(quantity*(SELECT price FROM productpackage WHERE productpackage.name = productpayment.ProductPackage_name)) AS 총합계 FROM productpayment";
+		String sql = "SELECT SUM(quantity*(SELECT price FROM db.productpackage WHERE productpackage.name = productpayment.ProductPackage_name)) AS 총합계 FROM db.productpayment";
+		int res = -1;
 		try {
 			conn = ds.getConnection();
 			pst = conn.prepareStatement(sql);
@@ -93,24 +143,77 @@ public class ProductPaymentDAO {
 			if (rs.isBeforeFirst())
 			{
 				rs.next();
-				int total = rs.getInt("총합계");
-				return total;
+				res = rs.getInt("총합계");
 			}
 			
-		} catch (SQLException e) {e.printStackTrace();}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
-		return -1;
+		return res;
+		
 	}
 
 	/*상품패키지명 */
-	public boolean findProductPackage(String name) throws SQLException {
-		String sql="SELECT * FROM ProductPackage WHERE name = ?";
-		conn = ds.getConnection();
-		pst = conn.prepareStatement(sql);
-		pst.setString(1,name);
-		rs = pst.executeQuery();
+	public boolean findProductPackage(String name){
+		String sql="SELECT * FROM db.ProductPackage WHERE name = ?";
+		boolean res = false;
+		try {
+			conn = ds.getConnection();
+			pst = conn.prepareStatement(sql);
+			pst.setString(1,name);
+			rs = pst.executeQuery();
 		
-		if (rs.isBeforeFirst()) return true;	//존재함		true 리턴
-		else return false;						//존재않음 		false 리턴
+		if (rs.isBeforeFirst()) res = true;	//존재함		true 리턴
+		else res = false;						//존재않음 		false 리턴
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+		return res;
 	}
 }

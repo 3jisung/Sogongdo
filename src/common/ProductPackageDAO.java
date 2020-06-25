@@ -36,7 +36,7 @@ public class ProductPackageDAO {
 	
 	/*상품패키지 조회*/
 	public ArrayList<ProductPackage> read() {
-		String sql = "SELECT * FROM ProductPackage";
+		String sql = "SELECT * FROM db.ProductPackage";
 		ArrayList<ProductPackage> list = new ArrayList<ProductPackage>();
 		
 		try {
@@ -51,63 +51,201 @@ public class ProductPackageDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 		return list;
 	}
 	
 	/*상품패키지 등록*/
-	public boolean createProductPackage(String name, int price) throws SQLException {
-		String sql = "INSERT INTO ProductPackage VALUES (?,?)";
-		if (findProductPackage(name)==false) {
-		conn = ds.getConnection();
-		pst = conn.prepareStatement(sql);
-		pst.setString(1, name);
-		pst.setInt(2, price);
-		pst.executeUpdate();
-		return true;
-		}
-		else return false;
+	public boolean createProductPackage(String name, int price) {
+		String sql = "INSERT INTO db.ProductPackage VALUES (?,?)";
+		boolean res=false;
+		try {
+			if (findProductPackage(name)==false) {
+			conn = ds.getConnection();
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, name);
+			pst.setInt(2, price);
+			pst.executeUpdate();
+			res = true;
+			}
+			else res = false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+		return res;
 	}
 	
 	/*상품패키지 수정*/
-	public boolean updateProductPackage(String name, String newName, int newPrice) throws SQLException {
-		String sql = "UPDATE ProductPackage SET name=?,price=? where name=?";
-		if (findProductPackage(name)==true) {
-			conn = ds.getConnection();
-			pst = conn.prepareStatement(sql);
-			pst.setString(1, newName);
-			pst.setInt(2, newPrice);
-			pst.setString(3, name);
-			pst.executeUpdate();
-			return true;
+	public boolean updateProductPackage(String name, String newName, int newPrice) {
+		String sql = "UPDATE db.ProductPackage SET name=?,price=? where name=?";
+		boolean res = false;
+		try {
+			if (findProductPackage(name)==true) {
+				conn = ds.getConnection();
+				pst = conn.prepareStatement(sql);
+				pst.setString(1, newName);
+				pst.setInt(2, newPrice);
+				pst.setString(3, name);
+				pst.executeUpdate();
+				res = true;
+			}
+			else res = false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs!=null) {
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+			}
+			if (pst != null) {
+	                try {
+	                    pst.close();
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+			if (conn != null) {
+	                try {
+	                    conn.close();
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                }
+	            }
 		}
-		else return false;
+		return res;
 	}
 	
 	
 	/*해당 상품패키지명 삭제 --> 이름 있으면 삭제하고 true리턴, 없으면 false*/
-	public boolean deleteProductPackage(String name) throws SQLException {
-		String sql = "DELETE FROM ProductPackage WHERE name=?";
-		if (findProductPackage(name)==true) {
-			conn = ds.getConnection();
-			pst = conn.prepareStatement(sql);
-			pst.setString(1, name);
-			pst.executeUpdate();
-			return true;
-		}
-		else return false;
+	public boolean deleteProductPackage(String name) {
+		String sql = "DELETE FROM db.ProductPackage WHERE name=?";
+		boolean res = false;
+		try {
+			if (findProductPackage(name)==true) {
+				conn = ds.getConnection();
+				pst = conn.prepareStatement(sql);
+				pst.setString(1, name);
+				pst.executeUpdate();
+				res= true;
+			}
+			else res= false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }		
+		return res;
 	}
 	
 	/*해당 상품패키지명 존재?*/
-	public boolean findProductPackage(String name) throws SQLException {
-		String sql="SELECT * FROM ProductPackage WHERE name = ?";
-		conn = ds.getConnection();
-		pst = conn.prepareStatement(sql);
-		pst.setString(1,name);
-		rs = pst.executeQuery();
-		
-		if (rs.isBeforeFirst()) return true;	//존재함		true 리턴
-		else return false;						//존재않음 		false 리턴
+	public boolean findProductPackage(String name) {
+		String sql="SELECT * FROM db.ProductPackage WHERE name = ?";
+		boolean res = false;
+		try {
+			conn = ds.getConnection();
+			pst = conn.prepareStatement(sql);
+			pst.setString(1,name);
+			rs = pst.executeQuery();
+			
+			if (rs.isBeforeFirst()) res= true;		//존재함		true 리턴
+			else res= false;						//존재않음 		false 리턴
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }	
+
+		return res;
 	}
 
 }
