@@ -1,11 +1,11 @@
 <%@page import="model.WorkPlaceDTO"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>사업장 속성 조회</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
