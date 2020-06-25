@@ -1,10 +1,5 @@
-<%@page import="model.FacilityDAO"%>
-<%@page import="model.FacilityDTO"%>
-<%@page import="java.util.List"%>
-<%@ page import = "java.sql.*" %>
-
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+         pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>

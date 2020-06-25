@@ -7,10 +7,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.cj.protocol.Resultset;
-
-import controller.readFacility;
-
 
 public class FacilityDAO {
 	private static FacilityDAO instance = new FacilityDAO();

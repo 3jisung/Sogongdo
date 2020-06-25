@@ -1,7 +1,6 @@
 package controller;
 
-import java.io.IOException;
-import java.util.List;
+import model.FacilityDTO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -10,13 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
-import javax.swing.JOptionPane;
-
-import com.sun.webkit.ContextMenu.ShowContext;
-
-import model.FacilityDAO;
-import model.FacilityDTO;
+import java.io.IOException;
 
 /**
  * Servlet implementation class readFacility

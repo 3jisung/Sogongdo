@@ -1,9 +1,9 @@
 <%@page import="com.sun.webkit.ContextMenu.ShowContext"%>
 <%@page import="com.sun.xml.internal.bind.v2.runtime.Location"%>
-<%@page import="model.FacilityDAO"%>
-<%@page import="model.FacilityDTO"%>
-<%@page import="java.util.List"%>
-<%@ page import = "java.sql.*" %>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@ page import = "java.sql.Statement" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 

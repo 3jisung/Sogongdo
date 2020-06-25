@@ -1,9 +1,8 @@
 <%@page import="model.FacilityDAO"%>
 <%@page import="model.FacilityDTO"%>
 <%@page import="java.util.List"%>
-<%@ page import = "java.sql.*" %>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+         pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>

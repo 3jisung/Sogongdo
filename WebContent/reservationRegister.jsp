@@ -1,7 +1,6 @@
 <%@page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="common.ReservationDAO"%>
 <%@page import="model.Reservation"%>
-<%@page import="common.*"%>
 <%@taglib prefix= "c" uri= "http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
