@@ -10,8 +10,21 @@
 <html>
 <head>
     <title>SoGong</title>
+	<style>
+		table {
+			width: 100%;
+			border: 1px solid #444444;
+			border-collapse: collapse;
+			text-align: center;
+		}
+		th, td {
+			border: 1px solid #444444;
+		}
+	</style>
 </head>
 <body>
+<header><a href="logIn.jsp">로그인</a> | <a href="logOut.jsp">로그아웃</a></header>
+<h1>소공도 통합관리 시스템</h1>
 	<c:if test="${sessionId ne null}">
 		<p>환영합니다 "${sessionId}" 님.</p>
 	</c:if>
@@ -30,11 +43,16 @@
  			alert("수정완료.");
 	    </script>
 	</c:if>
-	<a href="logIn.jsp">로그인</a>
-	<a href="logOut.jsp">로그아웃</a>
-	<a href="createUser.jsp">회원정보등록</a>
-	<a href="updateUser.jsp">회원정보수정</a>
-	<a href="deleteUser.jsp">회원정보삭제</a>
-	<a href="readUser.jsp">회원정보조회</a>
+	<ul>
+		<li style="list-style: none">메뉴</li>
+		<li><a href="createUser.jsp">회원정보등록</a></li>
+		<li><a href="updateUser.jsp">회원정보수정</a></li>
+		<li><a href="deleteUser.jsp">회원정보삭제</a></li>
+		<li><a href="readUser.jsp">회원정보조회</a></li>
+		<li><a href="Authority.jsp">권한 관리</a></li>
+		<li></li>
+		<li></li>
+	</ul>
+
 </body>
 </html>
