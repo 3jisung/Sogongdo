@@ -38,7 +38,7 @@ public class UserDAO {
 	public boolean createUser(User uDto) {
 		try {
 			conn = ds.getConnection();
-			String sql = "INSERT INTO user VALUES (?, ?, ?, ?, ?, now(), ?, ?)";
+			String sql = "INSERT INTO User VALUES (?, ?, ?, ?, ?, now(), ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, uDto.getId());
@@ -66,7 +66,7 @@ public class UserDAO {
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "SELECT * FROM user WHERE id=?";
+			String sql = "SELECT * FROM User WHERE id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -89,7 +89,7 @@ public class UserDAO {
 	public boolean updateUser(String id, String password, String address, String phone, String eMail) {
 		try {
 			conn = ds.getConnection();
-			String sql = "UPDATE user SET password=?, address=?, phoneNumber=?, e_mail=? WHERE id=?";
+			String sql = "UPDATE User SET password=?, address=?, phoneNumber=?, e_mail=? WHERE id=?";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, password);
@@ -115,7 +115,7 @@ public class UserDAO {
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "DELETE FROM user WHERE id=?";
+			String sql = "DELETE FROM User WHERE id=?";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, id);
@@ -142,7 +142,7 @@ public class UserDAO {
 		if (id.equals("")) {
 			try {
 				conn = ds.getConnection();
-				String sql = "SELECT * FROM user WHERE id LIKE \"%%\"";
+				String sql = "SELECT * FROM User WHERE id LIKE \"%%\"";
 				pstmt = conn.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 				
@@ -158,7 +158,7 @@ public class UserDAO {
 		} else {
 			try {
 				conn = ds.getConnection();
-				String sql = "SELECT * FROM user WHERE id=?";
+				String sql = "SELECT * FROM User WHERE id=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, id);
 				rs = pstmt.executeQuery();
@@ -180,7 +180,7 @@ public class UserDAO {
 	public boolean logIn(String id, String pw) {
 		try {
 			conn = ds.getConnection();
-			String sql = "SELECT password FROM user WHERE id=?";
+			String sql = "SELECT password FROM User WHERE id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
