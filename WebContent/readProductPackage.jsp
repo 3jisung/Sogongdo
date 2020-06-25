@@ -71,7 +71,7 @@
 		<form method="GET" action="productPackageController" name="paymentPP">
 		<input type="hidden" name="menu" value="4">
 			구매할 상품패키지명 : <input type="text" name ="pname">
-			<input type="number" name="quantity">
+			<input type="number" name="quantity" min="1" max="100">
 			<input type ="button" name="buy" value="구매" onclick="createProductPayment()">
 		</form>
 	</fieldset>
