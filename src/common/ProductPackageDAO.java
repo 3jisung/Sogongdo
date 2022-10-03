@@ -25,7 +25,7 @@ public class ProductPackageDAO {
 	public ProductPackageDAO() {
 		try {
 			Context context = new InitialContext();
-			ds = (DataSource) context.lookup("java:comp/env/jdbc/MySQL");
+			ds = (DataSource) context.lookup("java:comp/env/jdbc/db");
 			conn = null;
 			st = null;
 			rs = null;

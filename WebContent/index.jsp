@@ -54,7 +54,7 @@
 		<li><a href="reservation.jsp">예약 관리</a></li>
 		<li><a href="Facility.jsp">시설 관리</a></li>
 		<li><a href="workplaceMain.jsp">사업장 관리</a></li>
-		<li></li>
+		<li><a href="readProductPackage.jsp">상품관리</a></li>
 		<li></li>
 	</ul>
 

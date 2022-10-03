@@ -28,7 +28,7 @@ public class ProductPaymentDAO {
 	public ProductPaymentDAO() {
 		try {
 			Context context = new InitialContext();
-			ds = (DataSource) context.lookup("java:comp/env/jdbc/MySQL");
+			ds = (DataSource) context.lookup("java:comp/env/jdbc/db");
 			conn = null;
 			st = null;
 			rs = null;
@@ -39,7 +39,7 @@ public class ProductPaymentDAO {
 	
 	/*구매내역확인*/
 	public ArrayList<ProductPayment> read() {
-		String sql = "SELECT * FROM db.ProductPayment";
+		String sql = "SELECT * FROM db.PackagePayment";
 		ArrayList<ProductPayment> list = new ArrayList<ProductPayment>();
 		
 		try {
@@ -89,7 +89,7 @@ public class ProductPaymentDAO {
 	
 	/*상품구매*/
 	public boolean createProductPayment(String ProductPackage_name, String User_id, int quantity) throws SQLException {
-		String sql = "INSERT INTO db.ProductPayment VALUES (?,?,?,now())";
+		String sql = "INSERT INTO db.PackagePayment VALUES (?,?,?,now())";
 		boolean res = false;	
 		
 		try {
@@ -133,7 +133,7 @@ public class ProductPaymentDAO {
 	}
 	/*총 구매실적 불러오기*/
 	public int total() {
-		String sql = "SELECT SUM(quantity*(SELECT price FROM db.productpackage WHERE productpackage.name = productpayment.ProductPackage_name)) AS 총합계 FROM db.productpayment";
+		String sql = "SELECT SUM(quantity*(SELECT price FROM db.ProductPackage WHERE ProductPackage.name = PackagePayment.ProductPackage_name)) AS 총합계 FROM db.PackagePayment";
 		int res = -1;
 		try {
 			conn = ds.getConnection();
